@@ -39,7 +39,7 @@ always @ (srcA, srcB, alu_fun) begin
         4'b1101: result <= $signed(srcA)  >>> srcB[4:0]; //signed shift right
         4'b0010: result <= ($signed(srcA) < $signed(srcB)) ? 1 : 0; //signed comparison
         4'b0011: result <= (srcA < srcB) ? 1:0; //unsigned comparison
-        4'b1001: result <= (srcA); //load upper
+        4'b1001: result <= (srcB); //load upper
         
         default: result <= 32'hDEADBEEF;
     endcase

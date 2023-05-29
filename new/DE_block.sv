@@ -22,6 +22,7 @@
 
 
 module DE_block(
+    input de_reg_d de_reg,
     input logic [31:0] ir,
     output ex_reg_d ex_reg_in
     );
@@ -35,10 +36,13 @@ module DE_block(
 
     decoder dcdr(ir, ex_reg_in.regWrite, ex_reg_in.memWrite, ex_reg_in.memRead2, ex_reg_in.alu_fun, ex_reg_in.alu_srcA, ex_reg_in.alu_srcB, ex_reg_in.rf_wr_sel, ex_reg_in.opcode);
 
-    Immed_Gen imgen(ir, immed);
+    Immed_Gen imgen(ir, ex_reg_in.immed);
 
-    assign ex_reg_in.immed = immed;
+    assign ex_reg_in.func3 = ir[14:12];
     assign ex_reg_in.wa = ir[11:7];
+    assign ex_reg_in.pc = de_reg.pc;
+    assign ex_reg_in.size = ir[13:12];
+    assign ex_reg_in.sign = ir[14];
 
 
 endmodule

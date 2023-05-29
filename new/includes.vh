@@ -25,6 +25,8 @@ typedef struct packed{
 typedef struct packed{
 
     logic [31:0] pc;
+    logic [1:0] size;
+    logic sign;
 
     logic regWrite;
     logic memWrite;
@@ -34,6 +36,7 @@ typedef struct packed{
     logic [1:0] alu_srcB;
     logic rf_wr_sel;
     logic [6:0] opcode;
+    logic [2:0] func3;
 
     logic [31:0] immed;
 
@@ -44,6 +47,8 @@ typedef struct packed{
 
 typedef struct packed{
     logic [31:0] alu_result;
+    logic [1:0] size;
+    logic sign;
 
     logic [31:0] rs2;
     logic regWrite;
@@ -57,7 +62,7 @@ typedef struct packed{
 typedef struct packed{
     logic [31:0] alu_result;
 
-    logic memWrite;
+    logic regWrite;
     logic rf_wr_sel;
 
     logic [4:0] wa;

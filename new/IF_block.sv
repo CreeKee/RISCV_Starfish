@@ -25,7 +25,7 @@ module IF_block
 #(parameter int WIDTH = 32)
     (
     input if_reg_d reg_out_data,
-    input logic[WIDTH-1:0] br_res_ex,
+    input logic[1:0] br_res_ex,
     input logic[WIDTH-1:0] br_target_ex,
     input logic[WIDTH-1:0] mepc,
     input logic[WIDTH-1:0] mtvec,

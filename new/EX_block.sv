@@ -36,9 +36,10 @@ module EX_block(
     logic [31:0] frs2;
     logic [31:0] alu_inA;
     logic [31:0] alu_inB;
+    logic [31:0] branch_in;
 
-    mux_3t1_nb rs1_fwrd_mux(rs1_sel, ex_reg.rs1, wb_wd, mem_wd, frs1);
-    mux_3t1_nb rs2_fwrd_mux(rs2_sel, ex_reg.rs2, wb_wd, mem_wd, frs2);
+    mux_3t1_nb rs1_fwrd_mux(rs1_sel, ex_reg.rs1, mem_wd, wb_wd, frs1);
+    mux_3t1_nb rs2_fwrd_mux(rs2_sel, ex_reg.rs2, mem_wd, wb_wd, frs2);
 
     mux_3t1_nb alu_srcB_mux(ex_reg.alu_srcB, ex_reg.immed, frs2, 4, alu_inB);
     mux_2t1_nb alu_srcA_mux(ex_reg.alu_srcA, frs1, ex_reg.pc, alu_inA);
@@ -50,10 +51,12 @@ module EX_block(
         .result(mem_reg.alu_result)
     );
 
-    Branch_Unit bu(ex_reg.opcode, frs1, frs2);
+    Branch_Unit bu(ex_reg.func3, ex_reg.opcode, frs1, frs2, br_res);
+
+    mux_2t1_nb branch_mux(/*here*/(ex_reg.opcode != 7'b1100111)&ex_reg.alu_srcA, frs1, ex_reg.pc, branch_in);
 
     assign flush_ex = (ex_reg.opcode == `LOAD);
-    assign br_target = alu_inA+ex_reg.immed;
+    assign br_target = branch_in+ex_reg.immed;
 
     assign mem_reg.rs2 = frs2;
     assign mem_reg.memWrite = ex_reg.memWrite;
@@ -61,6 +64,8 @@ module EX_block(
     assign mem_reg.memRead2 = ex_reg.memRead2;
     assign mem_reg.rf_wr_sel = ex_reg.rf_wr_sel;
     assign mem_reg.wa = ex_reg.wa;
+    assign mem_reg.size = ex_reg.size;
+    assign mem_reg.sign = ex_reg.sign;
     
 
 endmodule

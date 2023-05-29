@@ -34,6 +34,7 @@ module mux_3t1_nb#(parameter n=32) (
                 0:      D_OUT = D0;
                 1:      D_OUT = D1;
                 2:      D_OUT = D2;
+                3:      D_OUT = D2; //duplicate to handle fancy forwarding stuff
                 
                 default D_OUT = 0;
         endcase 

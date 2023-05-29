@@ -109,15 +109,22 @@ module decoder(
 			begin
 				alu_fun = 4'b0000; 
 				alu_srcA = 1'b0; 
-				alu_srcB = 2'b01; 
+				alu_srcB = 2'b00; 
 				rf_wr_sel = 1'b1; 
 
                 memRead2 = 1'b1;
+				regWrite = 1'b1;
 			end
 			
 			BRANCH:
 			begin
                 /*TODO and handled elsewhere*/
+				alu_fun = 4'b0000; 
+				alu_srcA = 1'b1; 
+				alu_srcB = 2'b00; 
+				rf_wr_sel = 1'b0;
+				regWrite = 1'b0;
+
 			end
 			
 			STORE:

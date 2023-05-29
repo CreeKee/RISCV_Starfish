@@ -3,9 +3,9 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date: 05/15/2023 09:43:34 PM
+// Create Date: 05/18/2023 04:01:21 PM
 // Design Name: 
-// Module Name: EX_register
+// Module Name: WB_block
 // Project Name: 
 // Target Devices: 
 // Tool Versions: 
@@ -20,17 +20,11 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module EX_register(
-    input logic clk,
-    input logic reset,
-    input logic ld,
-    input ex_reg_d ex_reg_in,
-    output ex_reg_d ex_reg_out
+module WB_block(
+    input wb_reg_d wb_reg,
+    input logic [31:0] mem_data_out,
+    output logic [31:0] wd
     );
 
-    always_ff @(posedge clk) begin
-        if(reset) ex_reg_out<=0;
-        else if(ld) ex_reg_out <= ex_reg_in;
-        else ex_reg_out <= ex_reg_out;
-    end
+    mux_2t1_nb regmux(wb_reg.rf_wr_sel, wb_reg.alu_result, mem_data_out, wd);
 endmodule

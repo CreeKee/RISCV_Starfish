@@ -78,7 +78,9 @@
         begin
             j=0;
             for(i=0;i<NUM_COL;i=i+1) begin
+                $display("writing to mem\n");
                 if(weA[i]) begin
+                        
                         case(MEM_SIZE)
                             0: memory[memAddr2][i*COL_WIDTH +: COL_WIDTH] <= MEM_DIN2[7:0]; //MEM_DIN2[(3-i)*COL_WIDTH +: COL_WIDTH];
                             1: begin 

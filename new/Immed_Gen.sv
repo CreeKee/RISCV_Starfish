@@ -52,7 +52,7 @@ module Immed_Gen(
 
         JAL: immed = {{12{ir[31]}}, {ir[19:12]}, {ir[20]}, {ir[30:21]}, {1'b0}};    //J_type
 
-        JALR: immed = {{12{ir[31]}}, {ir[19:12]}, {ir[20]}, {ir[30:21]}, {1'b0}};   //J_type
+        JALR: immed = {{21{ir[31]}}, {ir[30:25]}, {ir[24:20]}};     //I_type
 
         LOAD: immed = {{21{ir[31]}}, {ir[30:25]}, {ir[24:20]}};     //I_type
 

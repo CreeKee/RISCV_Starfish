@@ -3,9 +3,9 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date: 05/15/2023 09:43:34 PM
+// Create Date: 05/16/2023 11:02:47 PM
 // Design Name: 
-// Module Name: EX_register
+// Module Name: WB_register
 // Project Name: 
 // Target Devices: 
 // Tool Versions: 
@@ -20,17 +20,17 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module EX_register(
+module WB_register(
     input logic clk,
     input logic reset,
     input logic ld,
-    input ex_reg_d ex_reg_in,
-    output ex_reg_d ex_reg_out
+    input wb_reg_d wb_reg_in,
+    output wb_reg_d wb_reg_out
     );
 
     always_ff @(posedge clk) begin
-        if(reset) ex_reg_out<=0;
-        else if(ld) ex_reg_out <= ex_reg_in;
-        else ex_reg_out <= ex_reg_out;
+        if(reset) wb_reg_out<=0;
+        else if(ld) wb_reg_out <= wb_reg_in;
+        else wb_reg_out <= wb_reg_out;
     end
 endmodule

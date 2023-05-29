@@ -28,7 +28,7 @@ module testbench(
     initial    
       begin       
          clk = 0;   //- init signal        
-         forever  #5 clk = ~clk;    
+         forever  #1 clk = ~clk;    
       end
 
     Starfish mcu(clk);
